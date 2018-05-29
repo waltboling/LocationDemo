@@ -10,9 +10,9 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-
+    
     let locationManager = CLLocationManager()
-
+    
     @IBOutlet weak var locationInfoLabel: UILabel!
     
     @IBAction func findLocation(_ sender: Any) {
@@ -20,6 +20,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+    }
+    
+    @IBAction func resetButtonWasTapped(_ sender: Any) {
+        resetLocationInfo()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -56,5 +60,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         Country: \(placemark.country!)
         """
     }
+    
+    func resetLocationInfo() {
+        locationManager.stopUpdatingLocation()
+        locationInfoLabel.text = ""
+    }
+    
 }
 

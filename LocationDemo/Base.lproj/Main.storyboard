@@ -32,11 +32,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiP-1a-CXI">
+                                <rect key="frame" x="166" y="398" width="43" height="30"/>
+                                <state key="normal" title="Reset "/>
+                                <connections>
+                                    <action selector="resetButtonWasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2y1-kX-0rK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7xu-BC-FNI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="231-i3-22I"/>
                             <constraint firstItem="Ajd-Of-y9g" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="335" id="61z-LA-tj7"/>
+                            <constraint firstItem="qiP-1a-CXI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AgY-lV-FUC"/>
+                            <constraint firstItem="qiP-1a-CXI" firstAttribute="top" secondItem="Ajd-Of-y9g" secondAttribute="bottom" constant="10" id="GgN-3N-6XO"/>
                             <constraint firstItem="Ajd-Of-y9g" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MIW-SJ-8tc"/>
                             <constraint firstItem="Ajd-Of-y9g" firstAttribute="top" secondItem="7xu-BC-FNI" secondAttribute="bottom" constant="30" id="TvS-jd-cDS"/>
                         </constraints>
@@ -48,6 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="37.600000000000001" y="33.733133433283363"/>
         </scene>
     </scenes>
 </document>
