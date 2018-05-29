@@ -7,19 +7,54 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    let locationManager = CLLocationManager()
+
+    @IBOutlet weak var locationInfoLabel: UILabel!
+    
+    @IBAction func findLocation(_ sender: Any) {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error: " + error.localizedDescription)
+        locationInfoLabel.text = "Error: " + error.localizedDescription
     }
-
-
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        CLGeocoder().reverseGeocodeLocation(manager.location!) { (placemarks, error) in
+            if (error != nil) {
+                print("Error: " + error!.localizedDescription)
+                self.locationInfoLabel.text = "Error: " + error!.localizedDescription
+                return
+            }
+            if placemarks!.count > 0 {
+                let placemark = placemarks![0] as CLPlacemark
+                self.displayLocationDetails(placemark: placemark, location: manager.location!)
+            } else {
+                print("Error retrieving data")
+                self.locationInfoLabel.text = "Error retrieving data"
+            }
+        }
+    }
+    
+    func displayLocationDetails(placemark: CLPlacemark, location: CLLocation) {
+        locationManager.stopUpdatingLocation()
+        locationInfoLabel.text = """
+        Latitude: \(location.coordinate.latitude)
+        Longitude: \(location.coordinate.longitude)
+        Locality: \(placemark.locality!)
+        Postal Code: \(placemark.postalCode!)
+        Administrative Area: \(placemark.administrativeArea!)
+        Country: \(placemark.country!)
+        """
+    }
 }
 
